@@ -31,7 +31,7 @@ export default defineConfig({
         {
           name: '登录',
           path: '/account/login',
-          component: './account/login',
+          component: './Account/login',
         },
       ],
     },
