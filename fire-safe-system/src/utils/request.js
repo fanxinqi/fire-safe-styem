@@ -67,11 +67,15 @@ const request = extend({
 });
 
 request.interceptors.response.use((response, options) => {
-  notification.error({
-    message: `登录已经过期`,
-    description: `可能他人在其他设备已登录,你可以重新退出登录`,
-  });
-  return response;
+  response.json().then((res) => {
+    if (res.code == 401) {
+      notification.error({
+        message: `登录已经过期`,
+        description: `可能他人在其他设备已登录,你可以重新退出登录`,
+      });
+    }
+    return response;
+  })
 });
 
 export default request;
