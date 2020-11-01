@@ -37,12 +37,13 @@ const FFCard = (props) => {
       extra={
         <Radio.Group value={innerValue} onChange={(e)=>onChange(e)}>
           {tabs.map((item) => (
-            <Radio.Button value={item.value}>{item.name}</Radio.Button>
+            <Radio.Button key={item.value} value={item.value}>{item.name}</Radio.Button>
           ))}
         </Radio.Group>
       }
     >
       {renderTab()}
+      {props.children}
     </Card>
   );
 };

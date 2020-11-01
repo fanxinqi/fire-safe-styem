@@ -45,5 +45,7 @@ npm run lint:fix
 npm test
 ```
 
+### 账号
+13811340571  hxza16888
 ## 更多
 [范新旗](610583102@qq.com).

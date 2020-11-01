@@ -42,12 +42,10 @@ const ProportionSales = ({
       >
         Sales
       </h4>
-      <Pie
-        // hasLegend
+      <Pie // hasLegend
         subTitle="Sales"
         total={() => <Yuan>{salesPieData.reduce((pre, now) => now.y + pre, 0)}</Yuan>}
-        data={salesPieData}
-        // valueFormat={value => <Yuan>{value}</Yuan>}
+        data={salesPieData} // valueFormat={value => <Yuan>{value}</Yuan>}
         height={248}
         lineWidth={4}
       />

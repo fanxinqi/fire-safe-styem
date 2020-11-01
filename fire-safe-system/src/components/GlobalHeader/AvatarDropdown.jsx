@@ -4,20 +4,19 @@ import React from 'react';
 import { history, connect } from 'umi';
 import HeaderDropdown from '../HeaderDropdown';
 import styles from './index.less';
+import Cookies from 'js-cookie';
 
 class AvatarDropdown extends React.Component {
   onMenuClick = event => {
     const { key } = event;
-
     if (key === 'logout') {
       const { dispatch } = this.props;
-
+      Cookies.remove('user');
       if (dispatch) {
         dispatch({
           type: 'login/logout',
         });
       }
-
       return;
     }
 
@@ -34,7 +33,7 @@ class AvatarDropdown extends React.Component {
     } = this.props;
     const menuHeaderDropdown = (
       <Menu className={styles.menu} selectedKeys={[]} onClick={this.onMenuClick}>
-        {menu && (
+        {/* {menu && (
           <Menu.Item key="center">
             <UserOutlined />
             个人中心
@@ -46,7 +45,7 @@ class AvatarDropdown extends React.Component {
             个人设置
           </Menu.Item>
         )}
-        {menu && <Menu.Divider />}
+        {menu && <Menu.Divider />} */}
 
         <Menu.Item key="logout">
           <LogoutOutlined />
@@ -54,11 +53,11 @@ class AvatarDropdown extends React.Component {
         </Menu.Item>
       </Menu>
     );
-    return currentUser && currentUser.name ? (
+    return currentUser && currentUser.userName ? (
       <HeaderDropdown overlay={menuHeaderDropdown}>
         <span className={`${styles.action} ${styles.account}`}>
           <Avatar size="small" className={styles.avatar} src={currentUser.avatar} alt="avatar" />
-          <span className={`${styles.name} anticon`}>{currentUser.name}</span>
+          <span className={`${styles.name} anticon`}>{currentUser.userName}</span>
         </span>
       </HeaderDropdown>
     ) : (

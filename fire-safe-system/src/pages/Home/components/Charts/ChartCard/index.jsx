@@ -36,12 +36,10 @@ class ChartCard extends React.Component {
 
     return (
       <div className={styles.chartCard}>
-        <div
-          className={classNames(styles.chartTop)}
-        >
+        <div className={classNames(styles.chartTop)}>
           <div className={styles.avatar}>{avatar}</div>
           <div className={styles.metaWrap}>
-          {renderTotal(total)}
+            {renderTotal(total)}
             <div className={styles.meta}>
               <span className={styles.title}>{title}</span>
               <span className={styles.action}>{action}</span>

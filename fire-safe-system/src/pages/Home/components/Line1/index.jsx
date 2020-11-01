@@ -1,30 +1,36 @@
 import { ChartCard } from '../Charts';
-import { Card, Col, Row, Tabs, Tooltip, Icon } from 'antd';
+import { Col, Row, Tooltip, Icon } from 'antd';
+import { line1Config } from './../../config';
+
+import styles from './style.less';
 const Line1 = (props) => {
-  const list = [1, 2, 3, 4];
-  const span = 24 / list.length;
+  const { data } = props;
+  const span = 24 / Object.keys(data).length;
   return (
-    <Row type="flex" style={{background:'#ffffff'}}>
-      {list.map(() => (
-        <Col span={span}>
-          <ChartCard
-            title="移动指标"
-            avatar={
-              <img
-                alt="indicator"
-                style={{ width: 30, height: 30 }}
-                src="https://gw.alipayobjects.com/zos/rmsportal/dURIMkkrRFpPgTuzkwnB.png"
+    <Row type="flex" style={{ background: '#ffffff', width: '100%' }}>
+      {Object.keys(data).map(
+        (key) =>
+          line1Config[key] && (
+            <Col className={styles.chartCard} key={key} span={span}>
+              <ChartCard
+                title={line1Config[key].title}
+                avatar={
+                  <img
+                    alt="indicator"
+                    style={{ width: 30, height: 30 }}
+                    src={line1Config[key].icon}
+                  />
+                }
+                action={
+                  <Tooltip title={line1Config[key].title}>
+                    <Icon type="info-circle-o" />
+                  </Tooltip>
+                }
+                total={data[key]}
               />
-            }
-            action={
-              <Tooltip title="指标说明">
-                <Icon type="info-circle-o" />
-              </Tooltip>
-            }
-            total={12656}
-          />
-        </Col>
-      ))}
+            </Col>
+          ),
+      )}
     </Row>
   );
 };

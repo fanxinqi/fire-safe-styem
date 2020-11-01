@@ -29,7 +29,7 @@ export default defineConfig({
       component: '../layouts/UserLayout',
       routes: [
         {
-          name: 'login',
+          name: '登录',
           path: '/account/login',
           component: './account/login',
         },
@@ -46,7 +46,7 @@ export default defineConfig({
           routes: [
             {
               path: '/',
-              redirect: '/home',
+              redirect: '/user/org',
             },
             {
               path: '/admin',
@@ -75,21 +75,106 @@ export default defineConfig({
               icon: 'smile',
               path: '/user',
               routes: [
-                { name: '用户列表', icon: 'smile', path: '/user/list', component: './User/List' },
+                {
+                  name: '机构管理',
+                  icon: 'smile',
+                  path: '/user/org',
+                  component: './User/Org',
+                },
+                {
+                  name: '角色管理',
+                  icon: 'smile',
+                  path: '/user/role',
+                  component: './User/Role',
+                },
+                {
+                  name: '用户列表',
+                  icon: 'smile',
+                  path: '/user/user',
+                  component: './User/User',
+                },
               ],
             },
             {
-              name: 'list.table-list',
-              icon: 'table',
-              path: '/list',
-              component: './ListTableList',
+              name: '资产管理',
+              icon: 'smile',
+              path: '/asset',
+              routes: [
+                {
+                  name: '产品类型',
+                  icon: 'smile',
+                  path: '/asset/product_type',
+                  component: './Asset/ProductType',
+                },
+                {
+                  name: '地址管理',
+                  icon: 'smile',
+                  path: '/asset/address',
+                  component: './Asset/Address',
+                },
+                {
+                  name: '存放点管理',
+                  icon: 'smile',
+                  path: '/asset/storage',
+                  component: './Asset/Storage',
+                },
+                {
+                  name: '设备管理',
+                  icon: 'smile',
+                  path: '/asset/device',
+                  component: './Asset/Device',
+                },
+                // {
+                //   name: '地图管理',
+                //   icon: 'smile',
+                //   path: '/asset/storage',
+                //   component: './Asset/Map',
+                // },
+              ],
             },
             {
-              name: '工作台',
+              name: '任务管理',
               icon: 'smile',
-              path: '/dashboardworkplace',
-              component: './DashboardWorkplace',
-            },
+              path: '/task',
+              routes: [
+                {
+                  name: '合同管理',
+                  icon: 'smile',
+                  path: '/task/contract',
+                  component: './Task/Contract',
+                },
+                {
+                  name: '任务管理',
+                  icon: 'smile',
+                  path: '/task/manage',
+                  component: './Task/Manage',
+                }
+              ]
+              },
+            // {
+            //   name: '标准列表',
+            //   icon: 'smile',
+            //   path: '/listbasiclist',
+            //   component: './ListBasicListTwo',
+            // },
+            // {
+            //   name: '标准列表',
+            //   icon: 'smile',
+            //   path: '/listbasiclist',
+            //   component: './ListBasicList',
+            // },
+            // {
+            //   name: 'list.table-list',
+            //   icon: 'table',
+            //   path: '/list',
+            //   component: './ListTableList',
+            // },
+            // {
+            //   name: '工作台',
+            //   icon: 'smile',
+            //   path: '/dashboardworkplace',
+            //   component: './DashboardWorkplace',
+            // },
             {
               component: './404',
             },
@@ -107,7 +192,9 @@ export default defineConfig({
   // Theme for antd: https://ant.design/docs/react/customize-theme-cn
   theme: {
     // ...darkTheme,
-    'primary-color': defaultSettings.primaryColor,
+    'primary-color': defaultSettings.custormColor,
+    // 'menu-dark-bg': '#ffffff',
+    'layout-sider-background': '#ffffff', // 'menu-dark-submenu-bg': '#000B14',
   },
   // @ts-ignore
   title: false,

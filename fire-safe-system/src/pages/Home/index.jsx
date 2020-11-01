@@ -1,49 +1,87 @@
 import { Row } from 'antd';
-import React, { Component, Suspense } from 'react';
-import { PageContainer } from '@ant-design/pro-layout';
 import { connect } from 'umi';
+import React, { Component, Suspense } from 'react';
+import 'ant-design-pro/dist/ant-design-pro.css';
 import styles from './style.less';
+import { repairStatusConfig } from './config';
 
 const Line1 = React.lazy(() => import('./components/Line1'));
 const Line2 = React.lazy(() => import('./components/Line2'));
 const Line3 = React.lazy(() => import('./components/Line3'));
 
 class Home extends Component {
+  componentDidMount() {
+    this.getPageData();
+  }
+  getPageData() {
+    this.props.dispatch({ type: 'home/fetch' });
+    this.props.dispatch({ type: 'home/fetchProductCount' });
+    this.props.dispatch({ type: 'home/fetchRepairStatus' });
+    this.props.dispatch({ type: 'home/fetchExtinguishAgent' });
+  }
   render() {
+    const { home = {} } = this.props;
+    const { extinguisherStatus, products = [], repairStatus, extinguishTypes } = home;
+    console.log('home', home);
+    const productCount = [];
+    products.map((item) => {
+      productCount.push({
+        x: item.productType,
+        y: item.productCount,
+      });
+    });
+    const repairStatusData = [];
+    Object.keys(repairStatus).forEach((key) => {
+      repairStatusData.push({
+        x: repairStatusConfig[key],
+        y: repairStatus[key],
+      });
+    });
+
+    const extinguishTypesData = [];
+    extinguishTypes.forEach((item) => {
+      extinguishTypesData.push({
+        x: item.extinguishType,
+        y: item.productCount,
+      });
+    });
+
+    console.log('home', home);
     return (
-      <PageContainer
-        title={false}
-        content={
+      <React.Fragment>
+        <div
+          style={{
+            marginTop: 24,
+          }}
+        >
           <Suspense fallback={null}>
-            <div className={styles.lin1Wrap}>
-              <Line1 />
-            </div>
+            {Object.keys(extinguisherStatus).length > 0 && <Line1 data={extinguisherStatus} />}
           </Suspense>
-        }
-      >
-        <React.Fragment>
-          <Row
-            gutter={24}
-            style={{
-              marginTop: 24,
-            }}
-          >
-            <Suspense fallback={null}>
-              <Line2 />
-            </Suspense>
-          </Row>
-          <Row
-            gutter={24}
-            style={{
-              marginTop: 24,
-            }}
-          >
-            <Suspense fallback={null}>
-              <Line3 />
-            </Suspense>
-          </Row>
-        </React.Fragment>
-      </PageContainer>
+        </div>
+        <div
+          style={{
+            marginTop: 24,
+          }}
+        >
+          <Suspense fallback={null}>
+            <Line2
+              productCount={productCount}
+              repairStatusData={repairStatusData}
+              extinguishTypesData={extinguishTypesData}
+              // extinguisherData={extinguisherData}
+            />
+          </Suspense>
+        </div>
+        <div
+          style={{
+            marginTop: 24,
+          }}
+        >
+          <Suspense fallback={null}>
+            <Line3 />
+          </Suspense>
+        </div>
+      </React.Fragment>
     );
   }
 }

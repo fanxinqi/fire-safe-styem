@@ -1,6 +1,9 @@
 import { Col, Row } from 'antd';
 import Card from '@/components/Card/style1';
-import { Pie, Bar } from '../Charts';
+import { Bar,Pie } from '../Charts';
+// import { Pie } from 'ant-design-pro/lib/Charts';
+
+import styles from  './style.less'
 
 const salesPieData = [
   {
@@ -45,16 +48,10 @@ const barData =
   },
 ];
 
-// for (let i = 0; i < 12; i += 1) {
-//     barData.push({
-//       x: `${i + 1}月`,
-//       y: Math.floor(Math.random() * 1000) + 200,
-//     });
-//   }
-
-const Line2 = () => {
+const Line2 = (props) => {
+  const { productCount, repairStatusData,extinguishTypesData} = props;
   return (
-    <Row span={24} gutter={[16, 0]}>
+    <Row span={24}>
       <Col span={8}>
         <Card title="设备数量">
           <Pie
@@ -62,37 +59,37 @@ const Line2 = () => {
             total={() => (
               <span
                 dangerouslySetInnerHTML={{
-                  __html: salesPieData.reduce((pre, now) => now.y + pre, 0),
+                  __html:  `<div><div>${productCount.reduce((pre, now) => now.y + pre, 0)}个</div></div>`,
                 }}
               />
             )}
-            data={salesPieData}
-            valueFormat={(val) => <span dangerouslySetInnerHTML={{ __html: val }} />}
+            data={productCount}
+            valueFormat={(val) => <span dangerouslySetInnerHTML={{ __html: val + '个' }} />}
             height={150}
           />
         </Card>
       </Col>
       <Col span={8}>
         <Card title="检修情况">
-          <Pie
+        <Pie
+          inner={0}
             hasLegend
-            inner={0}
             total={() => (
               <span
                 dangerouslySetInnerHTML={{
-                  __html: salesPieData.reduce((pre, now) => now.y + pre, 0),
+                  __html:  `<div><div>${repairStatusData.reduce((pre, now) => now.y + pre, 0)}</div></div>`,
                 }}
               />
             )}
-            data={salesPieData}
-            valueFormat={(val) => <span dangerouslySetInnerHTML={{ __html: val }} />}
+            data={repairStatusData}
+            valueFormat={(val) => <span dangerouslySetInnerHTML={{ __html: val + '个' }} />}
             height={150}
           />
         </Card>
       </Col>
       <Col span={8}>
         <Card title="灭火器分类">
-          <Bar height={225} data={barData} />
+          <Bar height={225} data={extinguishTypesData} />
         </Card>
       </Col>
     </Row>

@@ -1,4 +1,5 @@
 import { queryCurrent, query as queryUsers } from '@/services/user';
+import Cookies from 'js-cookie';
 
 const UserModel = {
   namespace: 'user',
@@ -15,10 +16,15 @@ const UserModel = {
     },
 
     *fetchCurrent(_, { call, put }) {
-      const response = yield call(queryCurrent);
+      // const response = yield call(queryCurrent);
+      const user = Cookies.get('user');
+      let userJson = {};
+      try {
+        userJson = JSON.parse(user);
+      } catch {}
       yield put({
         type: 'saveCurrentUser',
-        payload: response,
+        payload: userJson,
       });
     },
   },

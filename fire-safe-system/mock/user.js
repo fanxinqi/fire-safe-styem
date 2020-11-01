@@ -184,4 +184,120 @@ export default {
   },
   'GET  /api/login/captcha': getFakeCaptcha,
   'GEt /api/user/list': userList,
+  'POST /api/stat/extinguisherStatus': (req, res) => {
+    res.send({
+      code: '1',
+      msg: '成功',
+      data: {
+        total: 298767,
+        pendingCheckCount: 29672,
+        pendingRepairCount: 1767,
+        pendingDiscardCount: 2167,
+      },
+    });
+  },
+  'POST /api/stat/productCount': (req, res) => {
+    res.send({
+      code: '1',
+      msg: '成功',
+      data: {
+        products: [
+          {
+            productType: '灭火器',
+            productTypeId: '1',
+            productCount: 60,
+          },
+          {
+            productType: '灭火气箱',
+            productTypeId: '2',
+            productCount: 26,
+          },
+          {
+            productType: '消火栓',
+            productTypeId: '3',
+            productCount: 36,
+          },
+          {
+            productType: '器材箱',
+            productTypeId: 4,
+            productCount: 40,
+          },
+          {
+            productType: '其他',
+            productTypeId: 0,
+            productCount: 38,
+          },
+        ],
+      },
+    });
+  },
+  'POST /api/stat/repairStatus': (req, res) => {
+    res.send({
+      code: '1',
+      msg: '成功',
+      data: {
+        total: 500,
+        checkedCount: 1,
+        repairedCount: 2,
+        discardedCount: 3,
+      },
+    });
+  },
+  'POST /api/stat/extinguishAgent': (req, res) => {
+    res.send({
+      code: '1',
+      msg: '成功',
+      data: {
+        extinguishTypes: [
+          {
+            extinguishType: 'abc干粉',
+            productCount: 400,
+          },
+          {
+            extinguishType: '水基',
+            productCount: 500,
+          },
+          {
+            extinguishType: '二氧化碳',
+            productCount: 89,
+          },
+          {
+            extinguishType: '空气',
+            productCount: 523,
+          },
+        ],
+      },
+    });
+  },
+  
+  'GET /api/productType/list': (req, res) => {
+    res.send({
+      code: '1',
+      msg: '查询成功',
+      data: {
+        totalCount: '100',
+        totalPage: '10',
+        pageIndex: '1',
+        productTypes: [
+          {
+            productTypeId: '1',
+            productType: '1',
+            doc1Id: '1',
+            doc2Id: '2',
+            doc3Id: '3',
+            doc4Id: '3',
+            doc5Id: '4',
+            doc6Id: '5',
+            orgName: 'chess',
+          },
+        ],
+        docs: [
+          {
+            docNo: '',
+            docName: '',
+          },
+        ],
+      },
+    });
+  },
 };

@@ -4,6 +4,7 @@ import React, { useState } from 'react';
 import { Link, connect } from 'umi';
 import LoginForm from './components/Login';
 import styles from './style.less';
+const md5 = require('js-md5');
 
 const { Tab, UserName, Password, Mobile, Captcha, Submit } = LoginForm;
 
@@ -26,6 +27,7 @@ const Login = props => {
 
   const handleSubmit = values => {
     const { dispatch } = props;
+    values.password = md5(values.password + 'c(u*EHR)3jNci');
     dispatch({
       type: 'login/login',
       payload: { ...values, type },
@@ -41,8 +43,8 @@ const Login = props => {
           )}
 
           <UserName
-            name="userName"
-            placeholder="用户名: admin or user"
+            name="username"
+            placeholder="请输入用户名"
             rules={[
               {
                 required: true,
@@ -52,7 +54,7 @@ const Login = props => {
           />
           <Password
             name="password"
-            placeholder="密码: ant.design"
+            placeholder="请输入密码"
             rules={[
               {
                 required: true,
@@ -61,7 +63,7 @@ const Login = props => {
             ]}
           />
         </Tab>
-        <Tab key="mobile" tab="手机号登录">
+        {/* <Tab key="mobile" tab="手机号登录">
           {status === 'error' && loginType === 'mobile' && !submitting && (
             <LoginMessage content="验证码错误" />
           )}
@@ -92,7 +94,7 @@ const Login = props => {
               },
             ]}
           />
-        </Tab>
+        </Tab> */}
         <div>
           <Checkbox checked={autoLogin} onChange={e => setAutoLogin(e.target.checked)}>
             自动登录
@@ -106,21 +108,12 @@ const Login = props => {
           </a>
         </div>
         <Submit loading={submitting}>登录</Submit>
-        <div className={styles.other}>
-          其他登录方式
-          <AlipayCircleOutlined className={styles.icon} />
-          <TaobaoCircleOutlined className={styles.icon} />
-          <WeiboCircleOutlined className={styles.icon} />
-          <Link className={styles.register} to="/user/register">
-            注册账户
-          </Link>
-        </div>
       </LoginForm>
     </div>
   );
 };
 
-export default connect(({ login, loading }) => ({
+export default connect(({ login,loading }) => ({
   userLogin: login,
   submitting: loading.effects['login/login'],
 }))(Login);

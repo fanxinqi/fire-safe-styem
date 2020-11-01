@@ -3,6 +3,7 @@ import { history } from 'umi';
 import { fakeAccountLogin } from '@/services/login';
 import { setAuthority } from '@/utils/authority';
 import { getPageQuery } from '@/utils/utils';
+import Cookies from 'js-cookie';
 
 const Model = {
   namespace: 'login',
@@ -12,16 +13,19 @@ const Model = {
   effects: {
     *login({ payload }, { call, put }) {
       const response = yield call(fakeAccountLogin, payload);
+      debugger;
       yield put({
         type: 'changeLoginStatus',
         payload: response,
       }); // Login successfully
 
-      if (response.status === 'ok') {
+      if (response.code === 1) {
         const urlParams = new URL(window.location.href);
         const params = getPageQuery();
         let { redirect } = params;
-
+        try {
+          Cookies.set('user', JSON.stringify(response.data));
+        } catch {}
         if (redirect) {
           const redirectUrlParams = new URL(redirect);
 
