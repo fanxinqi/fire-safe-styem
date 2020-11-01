@@ -5,6 +5,7 @@ import { history, connect } from 'umi';
 import HeaderDropdown from '../HeaderDropdown';
 import styles from './index.less';
 import Cookies from 'js-cookie';
+import { BackgroundColor } from 'chalk';
 
 class AvatarDropdown extends React.Component {
   onMenuClick = event => {
@@ -56,7 +57,10 @@ class AvatarDropdown extends React.Component {
     return currentUser && currentUser.userName ? (
       <HeaderDropdown overlay={menuHeaderDropdown}>
         <span className={`${styles.action} ${styles.account}`}>
-          <Avatar size="small" className={styles.avatar} src={currentUser.avatar} alt="avatar" />
+          <Avatar style={{
+                marginRight:'10px',
+                backgroundColor:'rgb(114, 101, 230)'
+          }}  alt="avatar">{currentUser.userName}</Avatar>
           <span className={`${styles.name} anticon`}>{currentUser.userName}</span>
         </span>
       </HeaderDropdown>

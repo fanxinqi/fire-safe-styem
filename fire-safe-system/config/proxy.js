@@ -8,21 +8,21 @@
 export default {
   dev: {
     '/api/': {
-      target: 'http://47.92.69.204:8080',
+      target: 'http://39.98.62.33:8080',
       changeOrigin: true,
       pathRewrite: { '^/api': '' },
     },
   },
   test: {
     '/api/': {
-      target: 'http://47.92.69.204:8080',
+      target: 'http://39.98.62.33:8080',
       changeOrigin: true,
       pathRewrite: { '^/api': '' },
     },
   },
   pre: {
     '/api/': {
-      target: 'http://47.92.69.204:8080',
+      target: 'http://39.98.62.33:8080',
       changeOrigin: true,
       pathRewrite: { '^/api': '' },
     },

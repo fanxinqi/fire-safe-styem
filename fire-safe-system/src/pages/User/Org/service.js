@@ -22,12 +22,11 @@ function totree(list, parorgCode) {
   return result;
 }
 export async function query(params) {
+  params.limit = params.pageSize;
+  params.page = params.current
   const res = await request('/api/org/list', {
     method: 'POST',
     data: params,
-    // headers: {
-    //   'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8',
-    // },
   });
 
   return {

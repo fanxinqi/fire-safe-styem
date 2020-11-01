@@ -10,6 +10,9 @@ export const fields = [
   {
     title: '密码',
     dataIndex: 'password',
+    render:() => {
+      return '保密，不可见'
+    }
   },
   {
     title: '角色名',

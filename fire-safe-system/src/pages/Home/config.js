@@ -10,7 +10,7 @@ export const line1Config = {
   },
   pendingCheckCount: {
     key:'pendingCheckCount',
-     title: '待检测数', icon: discardedCount },
+     title: '待检测数', icon: pendingCheckCountIcon },
   repairedCount: {
     key:'repairedCount',
     title: '待维修数',

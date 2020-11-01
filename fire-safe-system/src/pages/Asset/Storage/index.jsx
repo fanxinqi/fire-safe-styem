@@ -151,9 +151,7 @@ const TableList = () => {
                 {selectedRowsState.length}
               </a>{' '}
               项&nbsp;&nbsp;
-              <span>
-                服务调用次数总计 {selectedRowsState.reduce((pre, item) => pre + item.callNo, 0)} 万
-              </span>
+              
             </div>
           }
         >
@@ -166,7 +164,7 @@ const TableList = () => {
           >
             批量删除
           </Button>
-          <Button type="primary">批量审批</Button>
+         
         </FooterToolbar>
       )}
       <CreateForm

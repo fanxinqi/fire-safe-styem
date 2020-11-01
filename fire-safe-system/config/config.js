@@ -72,7 +72,7 @@ export default defineConfig({
             },
             {
               name: '用户管理',
-              icon: 'smile',
+              icon: 'user',
               path: '/user',
               routes: [
                 {
@@ -97,7 +97,7 @@ export default defineConfig({
             },
             {
               name: '资产管理',
-              icon: 'smile',
+              icon: 'TransactionOutlined',
               path: '/asset',
               routes: [
                 {
@@ -134,7 +134,7 @@ export default defineConfig({
             },
             {
               name: '任务管理',
-              icon: 'smile',
+              icon: 'SolutionOutlined',
               path: '/task',
               routes: [
                 {

@@ -1,6 +1,8 @@
 import request from '@/utils/request';
 
 export async function query(params) {
+  params.limit = params.pageSize;
+  params.page = params.current;
   const res = await request('/api/productType/list', {
     method: 'POST',
     data: params,

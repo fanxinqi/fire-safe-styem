@@ -22,6 +22,8 @@ function totree(list, parorgCode) {
   return result;
 }
 export async function query(params) {
+  params.limit = params.pageSize;
+  params.page = params.current
   const res = await request(apiUrl.query, {
     method: 'GET',
     data: params,
