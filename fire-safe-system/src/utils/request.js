@@ -74,8 +74,9 @@ request.interceptors.response.use((response, options) => {
         description: `可能他人在其他设备已登录,你可以重新退出登录`,
       });
     }
-    return response;
+   
   })
+  return response;
 });
 
 export default request;
