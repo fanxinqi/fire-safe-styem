@@ -31,7 +31,7 @@ export const fields = [
     title: '设备状态',
     dataIndex: 'deviceStatus',
     render: (text, row, index) => {
-      return deviceStatus[row.deviceStatus];
+      return deviceStatus[row.deviceStatus] ;
     },
   },
   {

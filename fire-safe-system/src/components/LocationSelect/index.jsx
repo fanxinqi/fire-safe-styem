@@ -56,9 +56,11 @@ class SearchInput extends React.Component {
   };
 
   render() {
+    const { mode = 'tags' } = this.props;
     const options = this.state.data.map((d) => <Option key={d.value}>{d.text}</Option>);
     return (
       <Select
+        mode={mode}
         defaultValue={this.props.value}
         showSearch
         value={this.state.value}

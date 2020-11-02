@@ -1,7 +1,7 @@
 import { PlusOutlined } from '@ant-design/icons';
 import { Button, Divider, message, Input } from 'antd';
 import moment from 'moment';
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef} from 'react';
 import { PageContainer, FooterToolbar } from '@ant-design/pro-layout';
 import ProTable from '@ant-design/pro-table';
 import CreateForm from './components/CreateForm';
@@ -76,6 +76,7 @@ const TableList = () => {
   const [editData, setEditData] = useState({});
   const actionRef = useRef();
   const [selectedRowsState, setSelectedRows] = useState([]);
+
   const columns = [
     ...pageFields,
     {
@@ -89,11 +90,13 @@ const TableList = () => {
           <a
             onClick={() => {
               handleUpdateModalVisible(true);
-              const editData= {
+              const editData = {
                 ...record,
               };
               editData.startTime = moment(record.startTime, 'YYYY/MM/DD');
               editData.endTime = moment(record.endTime, 'YYYY/MM/DD');
+              editData.locationIds = editData.locationIds.split(',');
+              // editData.needCheck = Boolean(editData.needCheck);
               // editData.signTime = moment(editData.signTime, 'YYYY/MM/DD')
               // editData[fieldsCitySelectKey] = record[fieldsCitySelectKey].split('/'),
               setEditData(editData);
@@ -152,7 +155,6 @@ const TableList = () => {
                 {selectedRowsState.length}
               </a>{' '}
               项&nbsp;&nbsp;
-              
             </div>
           }
         >
@@ -165,7 +167,6 @@ const TableList = () => {
           >
             批量删除
           </Button>
-         
         </FooterToolbar>
       )}
       <CreateForm
@@ -177,7 +178,9 @@ const TableList = () => {
           onFinish={async (values) => {
             values.startTime = moment(values.startTime).format('YYYY-MM-DD h:mm:ss');
             values.endTime = moment(values.endTime).format('YYYY-MM-DD h:mm:ss');
-
+            // values.needCheck = Number(values.needCheck);
+            // values.needLocate = Number(values.needLocate);
+            values.locationIds = values.locationIds.join(',');
             const success = await handleAdd(values);
             if (success) {
               handleModalVisible(false);
@@ -220,8 +223,11 @@ const TableList = () => {
             };
             objValues.startTime = moment(editData.startTime, 'YYYY/MM/DD');
             objValues.endTime = moment(editData.endTime, 'YYYY/MM/DD');
-              // editData.repairTime = moment(editData.repairTime, 'YYYY/MM/DD');
+            // editData.repairTime = moment(editData.repairTime, 'YYYY/MM/DD');
             objValues[fieldsKey] = editData[fieldsKey];
+            objValues.locationIds = objValues.locationIds.join(',');
+            // objValues.needCheck = Number(objValues.needCheck);
+            // objValues.needLocate = Number(objValues.needLocate);
             // objValues[fieldsCitySelectKey] = objValues[fieldsCitySelectKey].join('/');
             const success = await handleUpdate(objValues);
             if (success) {
