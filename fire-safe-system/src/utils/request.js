@@ -66,7 +66,7 @@ const request = extend({
   },
 });
 
-request.interceptors.response.use((response, options) => {
+request.interceptors.response.use(async (response, options) => {
   // response.json().then((res) => {
   //   if (res.code == 401) {
   //     notification.error({
@@ -76,6 +76,14 @@ request.interceptors.response.use((response, options) => {
   //   }
   //   return response;
   // })
+  const data = await response.clone().json();
+  if (data && data.code == 401) {
+    notification.error({
+      message: `登录已经过期`,
+      description: `可能他人在其他设备已登录,你可以重新退出登录`,
+    });
+    // window.location.href='/account/login';
+  }
   return response;
 });
 
