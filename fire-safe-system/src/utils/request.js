@@ -5,7 +5,7 @@
 import { extend } from 'umi-request';
 import { notification } from 'antd';
 import Cookies from 'js-cookie';
-const user = Cookies.get('user');
+// const user = Cookies.get('user');
 const codeMessage = {
   200: '服务器成功返回请求的数据。',
   201: '新建或修改数据成功。',
@@ -50,10 +50,10 @@ const errorHandler = (error) => {
  * 配置request请求时的默认参数
  */
 
-let userJson = {};
-try {
-  userJson = JSON.parse(user);
-} catch {}
+// let userJson = {};
+// try {
+//   userJson = JSON.parse(user);
+// } catch {}
 // if (!userJson.token) {
 //   window.location.href = '/account/login';
 // }
@@ -61,21 +61,25 @@ const request = extend({
   errorHandler,
   // 默认错误处理
   credentials: 'include', // 默认请求是否带上cookie
-  headers: {
-    token: userJson.token,
-  },
+  // headers: {
+  //   token: userJson.token,
+  // },
+});
+
+request.interceptors.request.use((url, options) => {
+  const user = Cookies.get('user');
+  let userJson = {};
+  try {
+    userJson = JSON.parse(user);
+  } catch {}
+  options.headers['token'] = userJson.token;
+  return {
+    url,
+    options: { ...options, interceptors: true },
+  };
 });
 
 request.interceptors.response.use(async (response, options) => {
-  // response.json().then((res) => {
-  //   if (res.code == 401) {
-  //     notification.error({
-  //       message: `登录已经过期`,
-  //       description: `可能他人在其他设备已登录,你可以重新退出登录`,
-  //     });
-  //   }
-  //   return response;
-  // })
   const data = await response.clone().json();
   if (data && data.code == 401) {
     notification.error({
