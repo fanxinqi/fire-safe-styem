@@ -4,6 +4,10 @@ export const fields = [
     dataIndex: 'orgCode',
   },
   {
+    title: '存放点编号',
+    dataIndex: 'locationId',
+  },
+  {
     title: '存放点',
     dataIndex: 'locationName',
   },
