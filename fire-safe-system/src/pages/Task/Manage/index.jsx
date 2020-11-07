@@ -1,13 +1,14 @@
 import { PlusOutlined } from '@ant-design/icons';
 import { Button, Divider, message, Input } from 'antd';
 import moment from 'moment';
-import React, { useState, useRef} from 'react';
+import React, { useState, useRef } from 'react';
 import { PageContainer, FooterToolbar } from '@ant-design/pro-layout';
 import ProTable from '@ant-design/pro-table';
 import CreateForm from './components/CreateForm';
 import InnerForm from './components/InnerForm';
 import { query, update, add, remove } from './service';
 import { fields as pageFields, fieldsKey, formName, fieldsCitySelectKey } from './config';
+import ViewDetail from './components/ViewDetail';
 /**
  * 添加节点
  * @param fields
@@ -72,6 +73,7 @@ const handleRemove = async (selectedRows) => {
 const TableList = () => {
   const [createModalVisible, handleModalVisible] = useState(false);
   const [updateModalVisible, handleUpdateModalVisible] = useState(false);
+  const [viewModalVisible, handleViewModalVisible] = useState(false);
   const [defaultExpanded, setDefaultExpanded] = useState([]);
   const [editData, setEditData] = useState({});
   const actionRef = useRef();
@@ -85,8 +87,22 @@ const TableList = () => {
       valueType: 'option',
       render: (_, record) => (
         <>
-          {/* <a href="">查看</a> */}
-          {/* <Divider type="vertical" /> */}
+          <a
+            onClick={() => {
+              handleViewModalVisible(true);
+              const editData = {
+                ...record,
+              };
+              editData.startTime = moment(editData.startTime).format('YYYY-MM-DD h:mm:ss');
+              editData.endTime = moment(editData.endTime).format('YYYY-MM-DD h:mm:ss');
+              editData.createTime = moment(editData.createTime).format('YYYY-MM-DD h:mm:ss');
+              editData.locationIds = editData.locationIds.split(',');
+              setEditData(editData);
+            }}
+          >
+            查看
+          </a>
+          <Divider type="vertical" />
           <a
             onClick={() => {
               handleUpdateModalVisible(true);
@@ -96,9 +112,6 @@ const TableList = () => {
               editData.startTime = moment(record.startTime, 'YYYY/MM/DD');
               editData.endTime = moment(record.endTime, 'YYYY/MM/DD');
               editData.locationIds = editData.locationIds.split(',');
-              // editData.needCheck = Boolean(editData.needCheck);
-              // editData.signTime = moment(editData.signTime, 'YYYY/MM/DD')
-              // editData[fieldsCitySelectKey] = record[fieldsCitySelectKey].split('/'),
               setEditData(editData);
             }}
           >
@@ -238,28 +251,13 @@ const TableList = () => {
             }
           }}
         />
-        {/* <ProTable
-          onSubmit={async (value) => {
-            const success = await handleUpdate(value);
-            if (success) {
-              handleUpdateModalVisible(false);
-              if (actionRef.current) {
-                actionRef.current.reload();
-              }
-            }
-          }}
-          search={false}
-          rowKey="key"
-          type="form"
-          form={{
-            layout: 'horizontal',
-            initialValues: {
-              ...editData,
-            },
-          }}
-          columns={columns}
-          rowSelection={{}}
-        /> */}
+      </CreateForm>
+      <CreateForm
+        title="任务详情"
+        modalVisible={viewModalVisible}
+        onCancel={() => handleViewModalVisible(false)}
+      >
+        <ViewDetail data={editData} />
       </CreateForm>
     </PageContainer>
   );

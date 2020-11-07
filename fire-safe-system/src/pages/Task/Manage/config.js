@@ -5,6 +5,13 @@ export const taskType = {
   task_type_add_device: '新增',
   task_type_repair: '维修',
 };
+
+export const timeTypeMap = {
+  '1': '一天一次',
+  '7': '一周一次',
+  '30': '一月一次',
+};
+
 export const taskStatus = {
   0: '未启用',
   1: '待巡检',

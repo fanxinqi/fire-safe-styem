@@ -99,17 +99,6 @@ const InnerForm = (props) => {
         </Form.Item>
       )}
 
-      {/* {showNeedCheck ? (
-        <Form.Item label="是否检修" name="needCheck">
-          <Switch checkedChildren="是" unCheckedChildren="否"  />
-        </Form.Item>
-      ) : null}
-      {showNeedLocate ? (
-        <Form.Item label="是否定位" name="needLocate">
-          <Switch checkedChildren="是" unCheckedChildren="否"  />
-        </Form.Item>
-      ) : null} */}
-
       <Form.Item {...tailLayout}>
         <Button type="primary" htmlType="submit">
           保存
