@@ -8,6 +8,9 @@ import CreateForm from './components/CreateForm';
 import InnerForm from './components/InnerForm';
 import { query, update, add, remove } from './service';
 import { fields as pageFields, fieldsKey, formName, fieldsCitySelectKey } from './config';
+import request from '@/utils/request';
+import UploadButton from '@/components/UploadButton';
+
 /**
  * 添加节点
  * @param fields
@@ -123,6 +126,24 @@ const TableList = () => {
     },
   ];
 
+  const onFileChange = (e) => {
+    const files = e.target.files;
+    const file = files[0];
+    var formData = new FormData();
+    formData.append('file', file);
+    request
+      .post('/device/upload', {
+        data: formData,
+        requestType: 'form',
+      })
+      .then(function (response) {
+        console.log(response);
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+  };
+
   return (
     <PageContainer>
       <ProTable
@@ -134,6 +155,13 @@ const TableList = () => {
           <Button type="primary" onClick={() => handleModalVisible(true)}>
             <PlusOutlined /> 新建
           </Button>,
+          <UploadButton
+            onSuccess={() => {
+              if (actionRef.current) {
+                actionRef.current.reload();
+              }
+            }}
+          />,
         ]}
         expandable={{ defaultExpandedRowKeys: defaultExpanded }}
         request={(params, sorter, filter) => query({ ...params, sorter, filter })}
@@ -155,7 +183,6 @@ const TableList = () => {
                 {selectedRowsState.length}
               </a>{' '}
               项&nbsp;&nbsp;
-              
             </div>
           }
         >
@@ -168,7 +195,6 @@ const TableList = () => {
           >
             批量删除
           </Button>
-         
         </FooterToolbar>
       )}
       <CreateForm
