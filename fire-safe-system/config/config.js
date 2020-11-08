@@ -124,11 +124,17 @@ export default defineConfig({
                   path: '/asset/device',
                   component: './Asset/Device',
                 },
+                {
+                  name: '地图管理',
+                  icon: 'smile',
+                  path: '/asset/map',
+                  component: './Asset/Map',
+                },
                 // {
-                //   name: '地图管理',
+                //   name: '地图编辑',
                 //   icon: 'smile',
-                //   path: '/asset/storage',
-                //   component: './Asset/Map',
+                //   path: '/asset/map_edit',
+                //   component: './Asset/Map/components/InnerForm',
                 // },
               ],
             },
@@ -148,9 +154,9 @@ export default defineConfig({
                   icon: 'smile',
                   path: '/task/manage',
                   component: './Task/Manage',
-                }
-              ]
-              },
+                },
+              ],
+            },
             // {
             //   name: '标准列表',
             //   icon: 'smile',

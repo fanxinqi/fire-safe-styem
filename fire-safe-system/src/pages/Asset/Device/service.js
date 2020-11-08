@@ -12,6 +12,8 @@ export async function query(params) {
   return {
     data: res.data.list,
     success: true,
+    current: parseInt(`${params.currentPage}`, 10) || 1,
+    total: res.data.totalCount,
   };
 }
 export async function remove(params) {
@@ -23,12 +25,12 @@ export async function remove(params) {
 export async function add(params) {
   return request(apiUrl.add, {
     method: 'POST',
-    data: { ...params},
+    data: { ...params },
   });
 }
 export async function update(params) {
   return request(apiUrl.update, {
     method: 'POST',
-    data: { ...params},
+    data: { ...params },
   });
 }

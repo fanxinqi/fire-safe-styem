@@ -33,6 +33,8 @@ export async function query(params) {
     // data: totree(res.data.list,''),
     data: res.data.list,
     success: true,
+    current: parseInt(`${params.currentPage}`, 10) || 1,
+    total: res.data.totalCount,
   };
 }
 export async function remove(params) {
