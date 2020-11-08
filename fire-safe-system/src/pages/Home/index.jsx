@@ -4,6 +4,7 @@ import React, { Component, Suspense } from 'react';
 import 'ant-design-pro/dist/ant-design-pro.css';
 import styles from './style.less';
 import { repairStatusConfig } from './config';
+import OrgSelect from '@/components/OrgSelect';
 
 const Line1 = React.lazy(() => import('./components/Line1'));
 const Line2 = React.lazy(() => import('./components/Line2'));
@@ -54,6 +55,10 @@ class Home extends Component {
             marginTop: 24,
           }}
         >
+          机构：<OrgSelect  style={{
+            width: '200px',
+            marginBottom:'20px'
+          }} />
           <Suspense fallback={null}>
             {Object.keys(extinguisherStatus).length > 0 && <Line1 data={extinguisherStatus} />}
           </Suspense>

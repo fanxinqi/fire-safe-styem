@@ -246,9 +246,9 @@ class Tag extends EventEmitter {
         this.tagDownHander.call(this, e);
         this.emit('click');
       });
-      // this.buttonElement.addEventListener('click', () => {
-      //   this.emit('click');
-      // });
+        // this.buttonElement.addEventListener('click', () => {
+        //   this.emit('click');
+        // });
       document.addEventListener('mousemove', (this.tagMoveHander = this.tagMoveHander.bind(this)));
       document.addEventListener('mouseup', (this.tagUpHander = this.tagUpHander.bind(this)));
     }
