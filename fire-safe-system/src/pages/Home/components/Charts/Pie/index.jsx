@@ -251,11 +251,11 @@ class Pie extends Component {
           <div className={styles.legend}>
             {legendData.map((item, i) => (
               <div key={item.x} onClick={() => this.handleLegendClick(item, i)}>
-                <div className={styles.percentWrap}>
+                {/* <div className={styles.percentWrap}>
                   <span className={styles.percent}>
                     {`${(Number.isNaN(item.percent) ? 0 : item.percent * 100).toFixed(0)}%`}
                   </span>
-                </div>
+                </div> */}
                 <div className={styles.legendTitleWrap}>
                   <span
                     className={styles.dot}
@@ -264,6 +264,9 @@ class Pie extends Component {
                     }}
                   />
                   <span className={styles.legendTitle}>{item.x}</span>
+                  <span className={styles.percent}>
+                    {`${(Number.isNaN(item.percent) ? 0 : item.percent * 100).toFixed(0)}%`}
+                  </span>
                 </div>
 
                 {/* <Divider type="vertical" /> */}

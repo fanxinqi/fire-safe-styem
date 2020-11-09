@@ -28,4 +28,12 @@ export async function fetchExtinguishAgent(payload) {
   });
 };
 
+export async function fetchDevicetBylocation(payload) {
+  return request('/api/device/bylocation', {
+    method: 'POST',
+    data: payload,
+  });
+};
+
+
 

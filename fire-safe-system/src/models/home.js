@@ -1,4 +1,4 @@
-import { fetchExtinguisherStatus,fetchProductCount,fetchRepairStatus,fetchExtinguishAgent } from '@/services/home';
+import { fetchExtinguisherStatus,fetchProductCount,fetchRepairStatus,fetchExtinguishAgent,fetchDevicetBylocation } from '@/services/home';
 
 const initState = {
   extinguisherStatus: {},
@@ -33,6 +33,13 @@ const Model = {
     },
     *fetchExtinguishAgent(_, { call, put }) {
       const response = yield call(fetchExtinguishAgent);
+      yield put({
+        type: 'save',
+        payload: {extinguishTypes: response.data },
+      });
+    },
+    *fetchDeviceBylocation(_, { call, put }) {
+      const response = yield call(fetchDevicetBylocation);
       yield put({
         type: 'save',
         payload: {extinguishTypes: response.data },

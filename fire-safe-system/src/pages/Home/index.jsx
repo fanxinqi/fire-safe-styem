@@ -65,13 +65,13 @@ class Home extends Component {
             marginTop: 24,
           }}
         >
-          机构：
+          {/* 机构：
           <OrgSelect
             style={{
               width: '200px',
               marginBottom: '20px',
             }}
-          />
+          /> */}
           <Suspense fallback={null}>
             {Object.keys(extinguisherStatus).length > 0 && <Line1 data={extinguisherStatus} />}
           </Suspense>
