@@ -25,7 +25,7 @@ const InnerForm = (props) => {
       </Form.Item>
 
       <Form.Item label="上级存放点" name="parentId">
-        <LocationSelect />
+        <LocationSelect mode="" />
       </Form.Item>
       <Form.Item label="存放点名称" name="locationName">
         <Input />

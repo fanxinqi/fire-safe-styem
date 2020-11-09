@@ -17,8 +17,8 @@ const MarkMap = ({ value, onChange, imgUrl }) => {
   const newTag = (data) => {
     const tag = new Taggd.Tag(
       {
-        x: data.x,
-        y: data.y,
+        x: parseFloat(data.x),
+        y: parseFloat(data.y),
       },
       data.productType,
       {

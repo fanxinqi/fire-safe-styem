@@ -139,7 +139,7 @@ const InnerForm = (props) => {
         <UploadOssButton onSuccess={handleSuccess} />
       </Form.Item>
 
-      <Form.Item label="打点详情" name="devices">
+      <Form.Item label="打点详情" name="mapDevices">
         <MarkMap imgUrl={imgUrl} />
       </Form.Item>
 
@@ -148,31 +148,6 @@ const InnerForm = (props) => {
           保存
         </Button>
       </Form.Item>
-
-      {/* <Modal title="编辑标记" visible={visible} onOk={handleOk} onCancel={handleCancel}>
-        <Form>
-          <Form.Item label="设备编号" name="productTypeId">
-            <Input value={curreTag ? curreTag.getData().productTypeId : ''} />
-          </Form.Item>
-          <Form.Item label="设备类型" name="productTypeId">
-            <Input value={curreTag ? curreTag.getData().productType : ''} />
-          </Form.Item>
-          <Form.Item label="设备编号" name="deviceNo">
-            <Input
-              defaultValue={deviceNo}
-              onChange={(e) => {
-                setDeviceNo(e.target.value);
-              }}
-            />
-          </Form.Item>
-          <Form.Item label="设备x坐标" name="x">
-            <Input defaultValue={curreTag ? curreTag.getData().x : ''} />
-          </Form.Item>
-          <Form.Item label="设备y坐标" name="y">
-            <Input defaultValue={curreTag ? curreTag.getData().y : ''} />
-          </Form.Item>
-        </Form>
-      </Modal> */}
     </Form>
   );
 };
