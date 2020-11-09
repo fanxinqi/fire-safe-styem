@@ -11,16 +11,16 @@ export const taskStatus = {
 export const fields = [
   {
     title: '任务编号',
-    dataIndex: 'subTaskNo',
+    dataIndex: 'deviceNo',
   },
   {
-    title: '开始时间',
-    dataIndex: 'startTime',
+    title: '检查时间',
+    dataIndex: 'checkTime',
   },
-  {
-    title: '结束时间',
-    dataIndex: 'endTime',
-  },
+  // {
+  //   title: '结束时间',
+  //   dataIndex: 'endTime',
+  // },
   {
     title: '正常设备数',
     dataIndex: 'normalDeviceCount',

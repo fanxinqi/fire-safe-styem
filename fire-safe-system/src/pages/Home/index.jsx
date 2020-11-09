@@ -33,10 +33,12 @@ class Home extends Component {
     });
     const repairStatusData = [];
     Object.keys(repairStatus).forEach((key) => {
-      repairStatusData.push({
-        x: repairStatusConfig[key],
-        y: repairStatus[key],
-      });
+      if (key != 'locations') {
+        repairStatusData.push({
+          x: repairStatusConfig[key],
+          y: repairStatus[key],
+        });
+      }
     });
 
     const extinguishTypesData = [];
@@ -55,10 +57,13 @@ class Home extends Component {
             marginTop: 24,
           }}
         >
-          机构：<OrgSelect  style={{
-            width: '200px',
-            marginBottom:'20px'
-          }} />
+          机构：
+          <OrgSelect
+            style={{
+              width: '200px',
+              marginBottom: '20px',
+            }}
+          />
           <Suspense fallback={null}>
             {Object.keys(extinguisherStatus).length > 0 && <Line1 data={extinguisherStatus} />}
           </Suspense>

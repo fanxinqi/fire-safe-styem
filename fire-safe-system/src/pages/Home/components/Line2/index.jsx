@@ -5,51 +5,8 @@ import { Bar,Pie } from '../Charts';
 
 import styles from  './style.less'
 
-const salesPieData = [
-  {
-    x: '灭火器',
-    y: 22,
-  },
-  {
-    x: '灭火器箱',
-    y: 18,
-  },
-  {
-    x: '消防栓',
-    y: 20,
-  },
-  {
-    x: '器材箱',
-    y: 24,
-  },
-  {
-    x: '其他',
-    y: 16,
-  },
-];
-
-const barData = 
-[
-  {
-    x: 'ABC干粉',
-    y: 18,
-  },
-  {
-    x: '水基',
-    y: 28,
-  },
-  {
-    x: '二氧化碳',
-    y: 60,
-  },
-  {
-    x: '洁净气体',
-    y: 5,
-  },
-];
-
 const Line2 = (props) => {
-  const { productCount, repairStatusData,extinguishTypesData} = props;
+  const { productCount, repairStatusData, extinguishTypesData} = props;
   return (
     <Row span={24}>
       <Col span={8}>
