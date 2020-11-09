@@ -42,12 +42,20 @@ class Home extends Component {
     });
 
     const extinguishTypesData = [];
-    extinguishTypes.forEach((item) => {
-      extinguishTypesData.push({
-        x: item.extinguishType,
-        y: item.productCount,
-      });
+    Object.keys(extinguishTypes).forEach((key) => {
+      if (key != 'extinguishTypes') {
+        extinguishTypesData.push({
+          x: key,
+          y: extinguishTypes[key],
+        });
+      }
     });
+    // extinguishTypes.forEach((item) => {
+    //   extinguishTypesData.push({
+    //     x: item.extinguishType,
+    //     y: item.productCount,
+    //   });
+    // });
 
     console.log('home', home);
     return (

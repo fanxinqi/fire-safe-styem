@@ -4,7 +4,7 @@ const initState = {
   extinguisherStatus: {},
   products:[],
   repairStatus:{},
-  extinguishTypes:[],
+  extinguishTypes:{},
 };
 const Model = {
   namespace: 'home',
@@ -35,7 +35,7 @@ const Model = {
       const response = yield call(fetchExtinguishAgent);
       yield put({
         type: 'save',
-        payload: { ...response.data },
+        payload: {extinguishTypes: response.data },
       });
     },
   },
