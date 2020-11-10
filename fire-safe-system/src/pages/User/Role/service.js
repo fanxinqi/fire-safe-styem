@@ -26,7 +26,7 @@ export async function query(params) {
   params.page = params.current
   const res = await request(apiUrl.query, {
     method: 'GET',
-    data: params,
+    params: params,
     // headers: {
     //   'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8',
     // },

@@ -42,14 +42,12 @@ class Home extends Component {
     });
 
     const extinguishTypesData = [];
-    Object.keys(extinguishTypes).forEach((key) => {
-      if (key != 'extinguishTypes') {
-        extinguishTypesData.push({
-          x: key,
-          y: extinguishTypes[key],
-        });
-      }
-    });
+    extinguishTypes.extinguishTypes && extinguishTypes.extinguishTypes.forEach((item) =>
+      extinguishTypesData.push({
+        x: item.extinguishType,
+        y: item.productCount,
+      }),
+    );
     // extinguishTypes.forEach((item) => {
     //   extinguishTypesData.push({
     //     x: item.extinguishType,

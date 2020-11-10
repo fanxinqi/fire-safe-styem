@@ -19,7 +19,7 @@ function toTree(menuList) {
 export async function query(params) {
   const res = await request(apiUrl.query, {
     method: 'GET',
-    data: params,
+    params: params,
   });
 
   return toTree(res.menuList);

@@ -5,7 +5,6 @@ import { PageContainer, FooterToolbar } from '@ant-design/pro-layout';
 import ProTable from '@ant-design/pro-table';
 import CreateForm from './components/CreateForm';
 import { query, update, add, remove } from './service';
-import { query as queryRole } from '../Role/service';
 import { fields as pageFields, fieldsKey, formName } from './config';
 const md5 = require('js-md5');
 
