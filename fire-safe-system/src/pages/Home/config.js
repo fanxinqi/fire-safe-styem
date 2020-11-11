@@ -15,12 +15,12 @@ export const line1Config = [
   },
   {
     key: 'repairedCount',
-    title: '待维修数',
+    title: '已维修数',
     icon: repairedCountIcon,
   },
   {
     key: 'discardedCount',
-    title: '待报废数',
+    title: '已报废数',
     icon: discardedCount,
   },
 ];
