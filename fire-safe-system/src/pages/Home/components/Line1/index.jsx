@@ -8,29 +8,20 @@ const Line1 = (props) => {
   const span = 24 / Object.keys(data).length;
   return (
     <Row type="flex" style={{ background: '#ffffff', width: '100%' }}>
-      {Object.keys(data).map(
-        (key) =>
-          line1Config[key] && (
-            <Col className={styles.chartCard} key={key} span={span}>
-              <ChartCard
-                title={line1Config[key].title}
-                avatar={
-                  <img
-                    alt="indicator"
-                    style={{ width: 30, height: 30 }}
-                    src={line1Config[key].icon}
-                  />
-                }
-                action={
-                  <Tooltip title={line1Config[key].title}>
-                    <Icon type="info-circle-o" />
-                  </Tooltip>
-                }
-                total={data[key]}
-              />
-            </Col>
-          ),
-      )}
+      {line1Config.map((item) => (
+        <Col className={styles.chartCard} key={item.key} span={span}>
+          <ChartCard
+            title={item.title}
+            avatar={<img alt="indicator" style={{ width: 30, height: 30 }} src={item.icon} />}
+            action={
+              <Tooltip title={item.title}>
+                <Icon type="info-circle-o" />
+              </Tooltip>
+            }
+            total={data[item.key]}
+          />
+        </Col>
+      ))}
     </Row>
   );
 };

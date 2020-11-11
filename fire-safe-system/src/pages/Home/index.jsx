@@ -1,10 +1,7 @@
-import { Row } from 'antd';
 import { connect } from 'umi';
 import React, { Component, Suspense } from 'react';
 import 'ant-design-pro/dist/ant-design-pro.css';
-import styles from './style.less';
 import { repairStatusConfig } from './config';
-import OrgSelect from '@/components/OrgSelect';
 
 const Line1 = React.lazy(() => import('./components/Line1'));
 const Line2 = React.lazy(() => import('./components/Line2'));
@@ -32,14 +29,20 @@ class Home extends Component {
       });
     });
     const repairStatusData = [];
-    Object.keys(repairStatus).forEach((key) => {
-      if (key != 'locations') {
-        repairStatusData.push({
-          x: repairStatusConfig[key],
-          y: repairStatus[key],
-        });
-      }
-    });
+    repairStatusConfig.forEach(item=>{
+      repairStatusData.push({
+        x: item.name,
+        y: repairStatus[item.key],
+      });
+    })
+    // Object.keys(repairStatus).forEach((key) => {
+    //   if (key != 'locations') {
+    //     repairStatusData.push({
+    //       x: repairStatusConfig.find(item=>item.key==key).name,
+    //       y: repairStatus[key],
+    //     });
+    //   }
+    // });
 
     const extinguishTypesData = [];
     extinguishTypes.extinguishTypes && extinguishTypes.extinguishTypes.forEach((item) =>
