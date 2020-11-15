@@ -17,6 +17,12 @@ function fetch(value, callback) {
 
   function fake() {
     query({ username: value }).then((d) => {
+
+
+
+
+
+      
       if (currentValue === value) {
         const { data } = d;
         const reData = [];

@@ -8,6 +8,9 @@ const Line2 = React.lazy(() => import('./components/Line2'));
 const Line3 = React.lazy(() => import('./components/Line3'));
 
 class Home extends Component {
+  // state= {
+  //   firstProductTypeId:null,
+  // }
   componentDidMount() {
     this.getPageData();
   }
@@ -16,10 +19,17 @@ class Home extends Component {
     this.props.dispatch({ type: 'home/fetchProductCount' });
     this.props.dispatch({ type: 'home/fetchRepairStatus' });
     this.props.dispatch({ type: 'home/fetchExtinguishAgent' });
+    this.props.dispatch({ type: 'home/fetchStatProductDistribute' });
   }
   render() {
     const { home = {} } = this.props;
-    const { extinguisherStatus, products = [], repairStatus, extinguishTypes } = home;
+    const {
+      extinguisherStatus,
+      products = [],
+      repairStatus,
+      extinguishTypes,
+      statProductDistribute = { list: [] },
+    } = home;
     console.log('home', home);
     const productCount = [];
     products.map((item) => {
@@ -29,12 +39,12 @@ class Home extends Component {
       });
     });
     const repairStatusData = [];
-    repairStatusConfig.forEach(item=>{
+    repairStatusConfig.forEach((item) => {
       repairStatusData.push({
         x: item.name,
         y: repairStatus[item.key],
       });
-    })
+    });
     // Object.keys(repairStatus).forEach((key) => {
     //   if (key != 'locations') {
     //     repairStatusData.push({
@@ -45,12 +55,13 @@ class Home extends Component {
     // });
 
     const extinguishTypesData = [];
-    extinguishTypes.extinguishTypes && extinguishTypes.extinguishTypes.forEach((item) =>
-      extinguishTypesData.push({
-        x: item.extinguishType,
-        y: item.productCount,
-      }),
-    );
+    extinguishTypes.extinguishTypes &&
+      extinguishTypes.extinguishTypes.forEach((item) =>
+        extinguishTypesData.push({
+          x: item.extinguishType,
+          y: item.productCount,
+        }),
+      );
     // extinguishTypes.forEach((item) => {
     //   extinguishTypesData.push({
     //     x: item.extinguishType,
@@ -59,6 +70,10 @@ class Home extends Component {
     // });
 
     console.log('home', home);
+    let firstProductTypeId = (statProductDistribute.list || [])[0]
+      ? (statProductDistribute.list || [])[0].productTypeId
+      : null;
+
     return (
       <React.Fragment>
         <div
@@ -97,7 +112,9 @@ class Home extends Component {
           }}
         >
           <Suspense fallback={null}>
-            <Line3 />
+            {firstProductTypeId ? (
+              <Line3 defaultValue={firstProductTypeId} data={statProductDistribute.list || []} />
+            ) : null}
           </Suspense>
         </div>
       </React.Fragment>

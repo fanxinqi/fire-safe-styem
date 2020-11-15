@@ -35,5 +35,12 @@ export async function fetchDevicetBylocation(payload) {
   });
 };
 
+export async function fetchStatProductDistribute(payload) {
+  return request('/api/stat/productDistribute', {
+    method: 'POST',
+    data: payload,
+  });
+};
+
 
 

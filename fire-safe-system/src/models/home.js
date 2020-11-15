@@ -1,10 +1,18 @@
-import { fetchExtinguisherStatus,fetchProductCount,fetchRepairStatus,fetchExtinguishAgent,fetchDevicetBylocation } from '@/services/home';
+import {
+  fetchExtinguisherStatus,
+  fetchProductCount,
+  fetchRepairStatus,
+  fetchExtinguishAgent,
+  fetchDevicetBylocation,
+  fetchStatProductDistribute,
+} from '@/services/home';
 
 const initState = {
   extinguisherStatus: {},
-  products:[],
-  repairStatus:{},
-  extinguishTypes:{},
+  products: [],
+  repairStatus: {},
+  extinguishTypes: {},
+  statProductDistribute: {},
 };
 const Model = {
   namespace: 'home',
@@ -35,14 +43,21 @@ const Model = {
       const response = yield call(fetchExtinguishAgent);
       yield put({
         type: 'save',
-        payload: {extinguishTypes: response.data },
+        payload: { extinguishTypes: response.data },
       });
     },
     *fetchDeviceBylocation(_, { call, put }) {
       const response = yield call(fetchDevicetBylocation);
       yield put({
         type: 'save',
-        payload: {extinguishTypes: response.data },
+        payload: { extinguishTypes: response.data },
+      });
+    },
+    *fetchStatProductDistribute(_, { call, put }) {
+      const response = yield call(fetchStatProductDistribute);
+      yield put({
+        type: 'save',
+        payload: { statProductDistribute: response.data },
       });
     },
   },
