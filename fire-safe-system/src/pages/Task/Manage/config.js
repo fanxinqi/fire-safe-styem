@@ -78,7 +78,6 @@ export const fields = [
     },
   },
 ];
-
 export const fieldsKey = 'taskNo';
 export const fieldsCitySelectKey = 'district';
 export const formName = '任务';

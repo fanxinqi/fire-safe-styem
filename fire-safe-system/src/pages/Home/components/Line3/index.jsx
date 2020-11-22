@@ -16,44 +16,6 @@ class Line3 extends React.Component {
     defaultData: [],
   };
   componentDidMount() {
-    setTimeout(() => {
-      console.log('BMapGL', BMapGL);
-      var map = new BMapGL.Map('map_root');
-      console.log('map', map);
-      var point = new BMapGL.Point(116.404, 39.915);
-      map.centerAndZoom(point, 15);
-      // 创建小车图标
-      var myIcon = new BMapGL.Icon('/mark-icon.png', new BMapGL.Size(62, 62));
-      // 创建Marker标注，使用小车图标
-      var pt = new BMapGL.Point(116.417, 39.909);
-      var marker = new BMapGL.Marker(pt, {
-        icon: myIcon,
-      });
-      // 将标注添加到地图
-      map.addOverlay(marker);
-      map.addOverlay(this.createInnerMap(116.38, 39.92, 60));
-      map.addOverlay(this.createInnerMap(116.432, 39.92, 60));
-      map.addOverlay(this.createInnerMap(116.432, 40, 70));
-      map.addOverlay(this.createInnerMap(116.432, 39.908, 70));
-      map.addOverlay(this.createInnerMap(116.407, 39.908));
-      map.addOverlay(this.createInnerMap(116.41, 39.908));
-      map.addOverlay(this.createInnerMap(116.414, 39.911));
-      map.addOverlay(this.createInnerMap(116.425, 39.911));
-      map.addOverlay(this.createInnerMap(116.419, 39.911));
-      map.addOverlay(this.createInnerMap(116.418, 39.91));
-      map.addOverlay(this.createInnerMap(116.4, 39.9));
-      map.addOverlay(this.createInnerMap(116.3, 39.9));
-      map.addOverlay(this.createInnerMap(116.303, 39.905));
-      map.addOverlay(this.createInnerMap(116.305, 39.906));
-      map.addOverlay(this.createInnerMap(116.304, 39.909));
-      map.addOverlay(this.createInnerMap(116.32, 39.7));
-      // map.enableScrollWheelZoom(true);
-      var scaleCtrl = new BMapGL.ScaleControl(); // 添加比例尺控件
-      map.addControl(scaleCtrl);
-      var zoomCtrl = new BMapGL.ZoomControl(); // 添加比例尺控件
-      map.addControl(zoomCtrl);
-    }, 1000);
-
     this.actionRef = null;
     const { defaultValue } = this.props;
     this.changeHandle(defaultValue);
@@ -67,6 +29,46 @@ class Line3 extends React.Component {
     });
     return marker;
   }
+
+  onChangeHandle = () => {
+    // setTimeout(() => {
+    //   console.log('BMapGL', BMapGL);
+    //   var map = new BMapGL.Map('map_root');
+    //   console.log('map', map);
+    //   var point = new BMapGL.Point(116.404, 39.915);
+    //   map.centerAndZoom(point, 15);
+    //   // 创建小车图标
+    //   var myIcon = new BMapGL.Icon('/mark-icon.png', new BMapGL.Size(62, 62));
+    //   // 创建Marker标注，使用小车图标
+    //   var pt = new BMapGL.Point(116.417, 39.909);
+    //   var marker = new BMapGL.Marker(pt, {
+    //     icon: myIcon,
+    //   });
+    //   // 将标注添加到地图
+    //   map.addOverlay(marker);
+    //   map.addOverlay(this.createInnerMap(116.38, 39.92, 60));
+    //   map.addOverlay(this.createInnerMap(116.432, 39.92, 60));
+    //   map.addOverlay(this.createInnerMap(116.432, 40, 70));
+    //   map.addOverlay(this.createInnerMap(116.432, 39.908, 70));
+    //   map.addOverlay(this.createInnerMap(116.407, 39.908));
+    //   map.addOverlay(this.createInnerMap(116.41, 39.908));
+    //   map.addOverlay(this.createInnerMap(116.414, 39.911));
+    //   map.addOverlay(this.createInnerMap(116.425, 39.911));
+    //   map.addOverlay(this.createInnerMap(116.419, 39.911));
+    //   map.addOverlay(this.createInnerMap(116.418, 39.91));
+    //   map.addOverlay(this.createInnerMap(116.4, 39.9));
+    //   map.addOverlay(this.createInnerMap(116.3, 39.9));
+    //   map.addOverlay(this.createInnerMap(116.303, 39.905));
+    //   map.addOverlay(this.createInnerMap(116.305, 39.906));
+    //   map.addOverlay(this.createInnerMap(116.304, 39.909));
+    //   map.addOverlay(this.createInnerMap(116.32, 39.7));
+    //   // map.enableScrollWheelZoom(true);
+    //   var scaleCtrl = new BMapGL.ScaleControl(); // 添加比例尺控件
+    //   map.addControl(scaleCtrl);
+    //   var zoomCtrl = new BMapGL.ZoomControl(); // 添加比例尺控件
+    //   map.addControl(zoomCtrl);
+    // }, 1000);
+  };
 
   changeHandle = (value) => {
     const item = this.props.data.find((i) => i.productTypeId === value);
@@ -94,8 +96,39 @@ class Line3 extends React.Component {
 
     this.setState({
       bardata,
+      productTypeId: value,
     });
   };
+
+  renderMap() {
+    setTimeout(() => {
+      this.map = new BMapGL.Map('map_root');
+      // var point = new BMapGL.Point(116.404, 39.915);
+      // this.map.centerAndZoom(point, 15);
+      // 创建小车图标
+      var myIcon = new BMapGL.Icon('/mark-icon.png', new BMapGL.Size(62, 62));
+      // 创建Marker标注，使用小车图标
+      // var pt = new BMapGL.Point(116.417, 39.909);
+      // var marker = new BMapGL.Marker(pt, {
+      //   icon: myIcon,
+      // });
+      // // 将标注添加到地图
+      // this.map.addOverlay(marker);
+      // this.map.addOverlay(this.createInnerMap(116.38, 39.92, 60));
+      // this.map.addOverlay(this.createInnerMap(116.432, 39.92, 60));
+
+      this.state.defaultData.forEach((item) => {
+        debugger;
+        this.map.addOverlay(this.createInnerMap(item.longitude,item.latitude));
+      });
+
+      // map.enableScrollWheelZoom(true);
+      var scaleCtrl = new BMapGL.ScaleControl(); // 添加比例尺控件
+      this.map.addControl(scaleCtrl);
+      var zoomCtrl = new BMapGL.ZoomControl(); // 添加比例尺控件
+      this.map.addControl(zoomCtrl);
+    }, 1000);
+  }
 
   render() {
     const { data, defaultValue } = this.props;
@@ -122,7 +155,7 @@ class Line3 extends React.Component {
           </Select>
         </Col>
         <Col span={24}>
-          <Tabs defaultActiveKey="1">
+          <Tabs onChange={this.onChangeHandle} defaultActiveKey="1">
             <TabPane tab="数据报表" key="1">
               {this.state.bardata && this.state.bardata.length > 0 && (
                 <Chart
@@ -187,9 +220,40 @@ class Line3 extends React.Component {
               }} height={225} data={this.state.bardata} /> */}
               {/* <div className={styles.mapRoot} id="map_root"></div> */}
             </TabPane>
-            {/* <TabPane tab="室外" key="2">
-            <div className={styles.mapRoot} id="map_inner_root"></div>
-            </TabPane> */}
+            <TabPane tab="可视化图形" key="2">
+              <Select
+                showSearch
+                style={{ width: 200 }}
+                placeholder="请选址地址"
+                // optionFilterProp="children"
+                onChange={(value) => {
+                  query({
+                    locationId: value,
+                    productTypeId: this.state.productTypeId,
+                  }).then((res) => {
+                    this.setState(
+                      {
+                        defaultData: res.data,
+                      },
+                      () => {
+                        this.renderMap();
+                      },
+                    );
+                  });
+                }}
+                // onFocus={onFocus}
+                // onBlur={onBlur}
+                // onSearch={onSearch}
+                filterOption={(input, option) =>
+                  option.props.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
+                }
+              >
+                {this.state.bardata.map((item) => (
+                  <Option value={item.locationId}>{item.x}</Option>
+                ))}
+              </Select>
+              <div className={styles.mapRoot} id="map_root"></div>
+            </TabPane>
           </Tabs>
         </Col>
         {/* <Col span={24}>

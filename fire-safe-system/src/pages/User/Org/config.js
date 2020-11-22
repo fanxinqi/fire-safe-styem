@@ -2,7 +2,6 @@ export const fields = [
   {
     title: '编号',
     dataIndex: 'id',
-    hideInTable: true,
     hideInSearch: true,
   },
   {

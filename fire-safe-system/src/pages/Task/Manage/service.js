@@ -10,7 +10,7 @@ export async function query(params) {
   });
 
   return {
-    data: res.data.list,
+    data: res.data.list ,
     success: true,
     current: parseInt(`${params.currentPage}`, 10) || 1,
     total: res.data.totalCount,

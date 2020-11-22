@@ -16,6 +16,10 @@ export const fields = [
     dataIndex: 'orgCode',
   },
   {
+    title: '公司名称',
+    dataIndex: 'orgName',
+  },
+  {
     title: '存放点',
     dataIndex: 'locationName',
   },
@@ -31,7 +35,7 @@ export const fields = [
     title: '设备状态',
     dataIndex: 'deviceStatus',
     render: (text, row, index) => {
-      return deviceStatus[row.deviceStatus] ;
+      return deviceStatus[row.deviceStatus];
     },
   },
   {

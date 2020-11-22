@@ -2,16 +2,16 @@ import ProTable from '@ant-design/pro-table';
 import { query } from './service';
 import React, { useRef } from 'react';
 export const taskStatus = {
-    0: '未启用',
-    1: '待巡检',
-    2: '未完成',
-    3: '已完成',
-    4: '已停用',
-  };
+  0: '未启用',
+  1: '待巡检',
+  2: '未完成',
+  3: '已完成',
+  4: '已停用',
+};
 export const fields = [
   {
     title: '任务编号',
-    dataIndex: 'deviceNo',
+    dataIndex: 'taskId',
   },
   {
     title: '检查时间',
@@ -38,24 +38,51 @@ export const fields = [
   },
 ];
 
+export const deviceFields = [
+  {
+    title: '存放点',
+    dataIndex: 'locationName',
+  },
+  {
+    title: '设备类型',
+    dataIndex: 'deviceType',
+  },
+  {
+    title: '设备编号',
+    dataIndex: 'deviceNo',
+  },
+  {
+    title: '标志明码',
+    dataIndex: 'markCode',
+  },
+  {
+    title: '类型',
+    dataIndex: 'productTypeName',
+  },
+  {
+    title: '型号',
+    dataIndex: 'deviceModel',
+  },
+];
+
 const TaskDoDetail = (props) => {
-  const { data={} } = props;
-  const  { taskNo } = data;
+  const { data = {} } = props;
+  const { taskNo, taskType } = data;
   const actionRef = useRef();
+  let headerTitle = '巡检任务执行详情';
+  let thisFields = fields;
+  if (taskType === 'task_type_add_device') {
+    headerTitle = '新增任务执行详情';
+    thisFields = deviceFields;
+  }
   return (
     <ProTable
-      headerTitle={'任务执行详情'}
+      headerTitle={headerTitle}
       actionRef={actionRef}
       options={false}
       rowKey="key"
-      //   toolBarRender={() => [
-      //     <Button type="primary" onClick={() => handleModalVisible(true)}>
-      //       <PlusOutlined /> 新建
-      //     </Button>,
-      //   ]}
-      //   expandable={{ defaultExpandedRowKeys: defaultExpanded }}
-      request={(params, sorter, filter) => query({ ...params, taskNo })}
-      columns={fields}
+      request={(params, sorter, filter) => query({ ...params, taskNo, taskType })}
+      columns={thisFields}
     />
   );
 };

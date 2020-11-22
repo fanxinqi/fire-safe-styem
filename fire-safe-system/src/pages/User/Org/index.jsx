@@ -128,7 +128,7 @@ const TableList = () => {
           </Button>,
         ]}
         expandable={{ defaultExpandedRowKeys: defaultExpanded }}
-        request={(params, sorter, filter) => query({ ...params, sorter, filter })}
+        request={(params, sorter, filter) => query({ ...params})}
         columns={columns}
         rowSelection={{
           onChange: (_, selectedRows) => setSelectedRows(selectedRows),
