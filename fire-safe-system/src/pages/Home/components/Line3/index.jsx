@@ -101,33 +101,32 @@ class Line3 extends React.Component {
   };
 
   renderMap() {
-    setTimeout(() => {
-      this.map = new BMapGL.Map('map_root');
-      // var point = new BMapGL.Point(116.404, 39.915);
-      // this.map.centerAndZoom(point, 15);
-      // 创建小车图标
-      var myIcon = new BMapGL.Icon('/mark-icon.png', new BMapGL.Size(62, 62));
-      // 创建Marker标注，使用小车图标
-      // var pt = new BMapGL.Point(116.417, 39.909);
-      // var marker = new BMapGL.Marker(pt, {
-      //   icon: myIcon,
-      // });
-      // // 将标注添加到地图
-      // this.map.addOverlay(marker);
-      // this.map.addOverlay(this.createInnerMap(116.38, 39.92, 60));
-      // this.map.addOverlay(this.createInnerMap(116.432, 39.92, 60));
+    this.map = new BMapGL.Map('map_root');
+    // var point = new BMapGL.Point(116.404, 39.915);
+    // this.map.centerAndZoom(point, 15);
+    // 创建小车图标
+    var myIcon = new BMapGL.Icon('/mark-icon.png', new BMapGL.Size(62, 62));
+    // 创建Marker标注，使用小车图标
+    // var pt = new BMapGL.Point(116.417, 39.909);
+    // var marker = new BMapGL.Marker(pt, {
+    //   icon: myIcon,
+    // });
+    // // 将标注添加到地图
+    // this.map.addOverlay(marker);
+    // this.map.addOverlay(this.createInnerMap(116.38, 39.92, 60));
+    // this.map.addOverlay(this.createInnerMap(116.432, 39.92, 60));
 
-      this.state.defaultData.forEach((item) => {
-        debugger;
-        this.map.addOverlay(this.createInnerMap(item.longitude,item.latitude));
-      });
+    this.state.defaultData.forEach((item) => {
+      console.log(item.longitude,item.latitude);
+      this.map.addOverlay(this.createInnerMap(item.longitude, item.latitude));
+    });
+    
 
-      // map.enableScrollWheelZoom(true);
-      var scaleCtrl = new BMapGL.ScaleControl(); // 添加比例尺控件
-      this.map.addControl(scaleCtrl);
-      var zoomCtrl = new BMapGL.ZoomControl(); // 添加比例尺控件
-      this.map.addControl(zoomCtrl);
-    }, 1000);
+    this.map.enableScrollWheelZoom(true);
+    var scaleCtrl = new BMapGL.ScaleControl(); // 添加比例尺控件
+    this.map.addControl(scaleCtrl);
+    var zoomCtrl = new BMapGL.ZoomControl(); // 添加比例尺控件
+    this.map.addControl(zoomCtrl);
   }
 
   render() {
@@ -178,9 +177,12 @@ class Line3 extends React.Component {
                       locationId: this.state.locationId,
                       productTypeId: this.state.productTypeId,
                     }).then((res) => {
-                      this.setState({
-                        defaultData: res.data,
-                      });
+                      this.setState(
+                        {
+                          defaultData: res.data,
+                        },
+                        this.renderMap,
+                      );
                     });
                   }}
                   forceFit

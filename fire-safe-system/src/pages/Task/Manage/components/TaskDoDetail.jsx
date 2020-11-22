@@ -14,8 +14,12 @@ export const fields = [
     dataIndex: 'taskId',
   },
   {
-    title: '检查时间',
-    dataIndex: 'checkTime',
+    title: '开始时间',
+    dataIndex: 'startTime',
+  },
+  {
+    title: '结束时间',
+    dataIndex: 'endTime',
   },
   // {
   //   title: '结束时间',

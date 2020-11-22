@@ -25,8 +25,8 @@ export async function query(params) {
   params.limit = params.pageSize;
   params.page = params.current
   const res = await request('/api/org/list', {
-    method: 'POST',
-    data: params,
+    method: 'GET',
+    params: params,
   });
 
   return {
