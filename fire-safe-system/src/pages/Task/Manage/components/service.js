@@ -19,6 +19,8 @@ export async function query(params) {
   return {
     data,
     success: true,
+    current: parseInt(`${params.currentPage}`, 10) || 1,
+    total: res.data.totalCount,
   };
 }
 export async function remove(params) {

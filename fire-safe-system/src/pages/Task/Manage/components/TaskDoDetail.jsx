@@ -45,7 +45,7 @@ export const deviceFields = [
   },
   {
     title: '设备类型',
-    dataIndex: 'deviceType',
+    dataIndex: 'productTypeName',
   },
   {
     title: '设备编号',
@@ -54,10 +54,6 @@ export const deviceFields = [
   {
     title: '标志明码',
     dataIndex: 'markCode',
-  },
-  {
-    title: '类型',
-    dataIndex: 'productTypeName',
   },
   {
     title: '型号',
@@ -81,7 +77,7 @@ const TaskDoDetail = (props) => {
       actionRef={actionRef}
       options={false}
       rowKey="key"
-      request={(params, sorter, filter) => query({ ...params, taskNo, taskType })}
+      request={(params) => query({ ...params, taskNo, taskType })}
       columns={thisFields}
     />
   );
