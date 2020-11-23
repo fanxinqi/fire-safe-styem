@@ -1,7 +1,7 @@
 import React from 'react';
 import { Select } from 'antd';
 import { query } from './service';
-import { formValue,formText } from './config';
+import { formValue, formText } from './config';
 
 const { Option } = Select;
 
@@ -17,12 +17,6 @@ function fetch(value, callback) {
 
   function fake() {
     query({ username: value }).then((d) => {
-
-
-
-
-
-      
       if (currentValue === value) {
         const { data } = d;
         const reData = [];
@@ -63,9 +57,11 @@ class SearchInput extends React.Component {
   };
 
   render() {
+    const { mode = 'tags' } = this.props;
     const options = this.state.data.map((d) => <Option key={d.value}>{d.text}</Option>);
     return (
       <Select
+        mode={mode}
         defaultValue={this.props.value}
         showSearch
         value={this.state.value}

@@ -12,10 +12,6 @@ const deviceStatus = {
 };
 export const fields = [
   {
-    title: '公司简码',
-    dataIndex: 'orgCode',
-  },
-  {
     title: '公司名称',
     dataIndex: 'orgName',
   },

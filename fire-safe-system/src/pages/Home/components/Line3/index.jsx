@@ -1,10 +1,10 @@
 import React from 'react';
-import { Col, Row, Tabs, Select, Modal, Table } from 'antd';
+import { Col, Row, Tabs, Select, Drawer, Table } from 'antd';
 // import { Bar, Pie } from '../Charts';
 import { Chart, Geom, Axis, Tooltip } from 'bizcharts';
 import ProTable from '@ant-design/pro-table';
 import { fields as pageFields, deviceStatus } from './config';
-import { query } from './service';
+import { query,queryMap} from './service';
 
 import styles from './style.less';
 const { TabPane } = Tabs;
@@ -14,61 +14,36 @@ class Line3 extends React.Component {
     productTypeId: 0,
     locationId: 0,
     defaultData: [],
+    visible: false,
+    item:{},
   };
   componentDidMount() {
     this.actionRef = null;
     const { defaultValue } = this.props;
     this.changeHandle(defaultValue);
+    // queryMap({
+    //   orgCode:104
+    // }).then((res)=>{
+    //   console.log(res);
+    // })
   }
 
-  createInnerMap(p, t, size) {
+  createInnerMap(p, t, size, item) {
     var pt = new BMapGL.Point(p, t);
     var myIcon = new BMapGL.Icon('/mark-icon.png', new BMapGL.Size(size || 40, size || 40));
     var marker = new BMapGL.Marker(pt, {
       icon: myIcon,
     });
+    marker.addEventListener('click', () => {
+      // alert(1);
+      console.log(item);
+      this.setState({
+        item,
+        visible:true,
+      })
+    });
     return marker;
   }
-
-  onChangeHandle = () => {
-    // setTimeout(() => {
-    //   console.log('BMapGL', BMapGL);
-    //   var map = new BMapGL.Map('map_root');
-    //   console.log('map', map);
-    //   var point = new BMapGL.Point(116.404, 39.915);
-    //   map.centerAndZoom(point, 15);
-    //   // 创建小车图标
-    //   var myIcon = new BMapGL.Icon('/mark-icon.png', new BMapGL.Size(62, 62));
-    //   // 创建Marker标注，使用小车图标
-    //   var pt = new BMapGL.Point(116.417, 39.909);
-    //   var marker = new BMapGL.Marker(pt, {
-    //     icon: myIcon,
-    //   });
-    //   // 将标注添加到地图
-    //   map.addOverlay(marker);
-    //   map.addOverlay(this.createInnerMap(116.38, 39.92, 60));
-    //   map.addOverlay(this.createInnerMap(116.432, 39.92, 60));
-    //   map.addOverlay(this.createInnerMap(116.432, 40, 70));
-    //   map.addOverlay(this.createInnerMap(116.432, 39.908, 70));
-    //   map.addOverlay(this.createInnerMap(116.407, 39.908));
-    //   map.addOverlay(this.createInnerMap(116.41, 39.908));
-    //   map.addOverlay(this.createInnerMap(116.414, 39.911));
-    //   map.addOverlay(this.createInnerMap(116.425, 39.911));
-    //   map.addOverlay(this.createInnerMap(116.419, 39.911));
-    //   map.addOverlay(this.createInnerMap(116.418, 39.91));
-    //   map.addOverlay(this.createInnerMap(116.4, 39.9));
-    //   map.addOverlay(this.createInnerMap(116.3, 39.9));
-    //   map.addOverlay(this.createInnerMap(116.303, 39.905));
-    //   map.addOverlay(this.createInnerMap(116.305, 39.906));
-    //   map.addOverlay(this.createInnerMap(116.304, 39.909));
-    //   map.addOverlay(this.createInnerMap(116.32, 39.7));
-    //   // map.enableScrollWheelZoom(true);
-    //   var scaleCtrl = new BMapGL.ScaleControl(); // 添加比例尺控件
-    //   map.addControl(scaleCtrl);
-    //   var zoomCtrl = new BMapGL.ZoomControl(); // 添加比例尺控件
-    //   map.addControl(zoomCtrl);
-    // }, 1000);
-  };
 
   changeHandle = (value) => {
     const item = this.props.data.find((i) => i.productTypeId === value);
@@ -105,7 +80,7 @@ class Line3 extends React.Component {
     // var point = new BMapGL.Point(116.404, 39.915);
     // this.map.centerAndZoom(point, 15);
     // 创建小车图标
-    var myIcon = new BMapGL.Icon('/mark-icon.png', new BMapGL.Size(62, 62));
+    // var myIcon = new BMapGL.Icon('/mark-icon.png', new BMapGL.Size(62, 62));
     // 创建Marker标注，使用小车图标
     // var pt = new BMapGL.Point(116.417, 39.909);
     // var marker = new BMapGL.Marker(pt, {
@@ -116,11 +91,13 @@ class Line3 extends React.Component {
     // this.map.addOverlay(this.createInnerMap(116.38, 39.92, 60));
     // this.map.addOverlay(this.createInnerMap(116.432, 39.92, 60));
 
-    this.state.defaultData.forEach((item) => {
-      console.log(item.longitude,item.latitude);
-      this.map.addOverlay(this.createInnerMap(item.longitude, item.latitude));
+    this.state.defaultData.forEach((item, index) => {
+      if (index === 0) {
+        var point = new BMapGL.Point(item.longitude, item.latitude);
+        this.map.centerAndZoom(point, 15);
+      }
+      this.map.addOverlay(this.createInnerMap(item.longitude, item.latitude, null, item));
     });
-    
 
     this.map.enableScrollWheelZoom(true);
     var scaleCtrl = new BMapGL.ScaleControl(); // 添加比例尺控件
@@ -131,6 +108,7 @@ class Line3 extends React.Component {
 
   render() {
     const { data, defaultValue } = this.props;
+    const {item} = this.state;
     return (
       <Row
         span={24}
@@ -200,29 +178,8 @@ class Line3 extends React.Component {
               )}
 
               <Table dataSource={this.state.defaultData} columns={pageFields} />
-              {/* <ProTable
-                options={false}
-                defaultData={this.state.defaultData}
-                actionRef={(actionRef) => (this.actionRef = actionRef)}
-                rowKey="key"
-                manualRequest={false}
-                request={(params, sorter, filter) =>
-                  query({
-                    ...params,
-                    locationId: this.state.locationId,
-                    productTypeId: this.state.productTypeId,
-                  })
-                }
-                columns={pageFields}
-              /> */}
-
-              {/* <Bar onClick={e=>{
-                console.log(e);
-                debugger;
-              }} height={225} data={this.state.bardata} /> */}
-              {/* <div className={styles.mapRoot} id="map_root"></div> */}
             </TabPane>
-            <TabPane tab="可视化图形" key="2">
+            <TabPane tab="室外地图" key="2">
               <Select
                 showSearch
                 style={{ width: 200 }}
@@ -256,14 +213,30 @@ class Line3 extends React.Component {
               </Select>
               <div className={styles.mapRoot} id="map_root"></div>
             </TabPane>
+            {/* <TabPane tab="室内地图" key="3">
+              
+            </TabPane> */}
           </Tabs>
         </Col>
-        {/* <Col span={24}>
-          <Card title="灭火器位置分布">
-            <div className={styles.mapRoot} id="map_root">
-            </div>
-          </Card>
-        </Col> */}
+        <Drawer
+          title="设备详情"
+          placement="right"
+          closable={false}
+          onClose={() => {
+            this.setState({ visible: false });
+          }}
+          visible={this.state.visible}
+        >
+          <p>公司名称：{item.orgName}</p>
+          <p>位置：{item.locationName}</p>
+          <p>设备类型：{item.productTypeName}</p>
+          <p>品牌：{item.brand}</p>
+          <p>设备编号：{item.deviceNo}</p>
+          <p>型号：{item.deviceModel}</p>
+          <p>生产日期：{item.produceDate}</p>
+          <p>经纬度:{item.longitude},{item.latitude}</p>
+          <p>状态:{deviceStatus[item.checkStatus]}</p>
+        </Drawer>
       </Row>
     );
   }

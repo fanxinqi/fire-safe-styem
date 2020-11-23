@@ -16,3 +16,18 @@ export async function query(params) {
     total: res.data.totalCount,
   };
 }
+
+export async function queryMap(params) {
+  const res = await request(apiUrl.queryMap, {
+    method: 'POST',
+    data: params,
+  });
+
+  return {
+    data: res.data,
+    success: true,
+    // current: parseInt(`${params.currentPage}`, 10) || 1,
+    // total: res.data.totalCount,
+  };
+}
+

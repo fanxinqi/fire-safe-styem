@@ -35,6 +35,7 @@ export const fields = [
 
 export const apiUrl = {
   query: '/api/device/bylocation',
+  queryMap:'/api/stat/mapDistribute',
   remove: '/api/role/delete',
   update: '/api/role/edit',
   add: '/api/role/add',
