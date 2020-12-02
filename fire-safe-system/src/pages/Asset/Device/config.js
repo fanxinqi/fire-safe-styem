@@ -1,3 +1,4 @@
+import OrgSelect from '@/components/OrgSelect';
 const deviceStatus = {
   0: '正常',
   1: '待检测',
@@ -14,6 +15,18 @@ export const fields = [
   {
     title: '公司名称',
     dataIndex: 'orgName',
+    hideInSearch:true,
+    renderFormItem:(item,props)=>{
+      return <OrgSelect />
+    }
+  },
+  {
+    title: '公司名称',
+    dataIndex: 'orgCode',
+    hideInTable:true,
+    renderFormItem:(item,props)=>{
+      return <OrgSelect value={props.value} onChange={props.onChange} />
+    }
   },
   {
     title: '存放点',
