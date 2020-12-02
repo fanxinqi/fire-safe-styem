@@ -7,6 +7,7 @@ import CreateForm from './components/CreateForm';
 import InnerForm from './components/InnerForm';
 import { query, update, add, remove } from './service';
 import { fields as pageFields, fieldsKey, formName, fieldsCitySelectKey } from './config';
+import UploadButton from '@/components/UploadButton';
 /**
  * 添加节点
  * @param fields
@@ -94,7 +95,7 @@ const TableList = () => {
               if (record[fieldsCitySelectKey]) {
                 editData[fieldsCitySelectKey] = record[fieldsCitySelectKey].split('/');
               }
-              editData.parentId = String(editData.parentId)
+              editData.parentId = String(editData.parentId);
               setEditData(editData);
             }}
           >
@@ -130,6 +131,14 @@ const TableList = () => {
           <Button type="primary" onClick={() => handleModalVisible(true)}>
             <PlusOutlined /> 新建
           </Button>,
+          <UploadButton
+            api={'/api/location/upload'}
+            onSuccess={() => {
+              if (actionRef.current) {
+                actionRef.current.reload();
+              }
+            }}
+          />,
         ]}
         expandable={{ defaultExpandedRowKeys: defaultExpanded }}
         request={(params, sorter, filter) => query({ ...params, sorter, filter })}
@@ -151,7 +160,6 @@ const TableList = () => {
                 {selectedRowsState.length}
               </a>{' '}
               项&nbsp;&nbsp;
-              
             </div>
           }
         >
@@ -164,7 +172,6 @@ const TableList = () => {
           >
             批量删除
           </Button>
-         
         </FooterToolbar>
       )}
       <CreateForm

@@ -11,7 +11,7 @@ const UploadButton = (props) => {
     formData.append('file', file);
     const hide = message.loading('正在上传');
     request
-      .post('/api/device/upload', {
+      .post(api, {
         data: formData,
         requestType: 'form',
       })
