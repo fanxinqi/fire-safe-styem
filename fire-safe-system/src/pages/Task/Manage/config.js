@@ -68,7 +68,11 @@ export const fields = [
   },
   {
     title: '负责人',
-    dataIndex: 'assignedUserName',
+    dataIndex: 'assignedUsers',
+    render: (text, row, index) => {
+      const userNames = row.assignedUsers.map(item=>item.username)
+      return <span>{userNames.join(',')}</span>;
+    },
   },
   {
     title: '状态',

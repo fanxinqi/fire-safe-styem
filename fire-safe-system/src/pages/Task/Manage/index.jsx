@@ -206,6 +206,7 @@ const TableList = () => {
             values.startTime = moment(values.startTime).format('YYYY-MM-DD h:mm:ss');
             values.endTime = moment(values.endTime).format('YYYY-MM-DD h:mm:ss');
             values.locationIds = values.locationIds.join(',');
+            values.assignedUserId = values.assignedUserId.map(item=>parseInt(item));
             const success = await handleAdd(values);
             if (success) {
               handleModalVisible(false);
@@ -231,6 +232,7 @@ const TableList = () => {
             objValues.endTime = moment(editData.endTime, 'YYYY/MM/DD');
             objValues[fieldsKey] = editData[fieldsKey];
             objValues.locationIds = objValues.locationIds.join(',');
+            objValues.assignedUserId = objValues.assignedUserId.map(item=>parseInt(item));
             const success = await handleUpdate(objValues);
             if (success) {
               handleUpdateModalVisible(false);
