@@ -15,7 +15,7 @@ function fetch(value, callback) {
   currentValue = value;
 
   function fake() {
-    query({ orgName: value }).then((d) => {
+    query({ locationName: value }).then((d) => {
       if (currentValue === value) {
         const { data } = d;
         const reData = [];
