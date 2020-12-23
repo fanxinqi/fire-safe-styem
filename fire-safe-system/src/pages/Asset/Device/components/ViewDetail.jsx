@@ -24,7 +24,7 @@ const ViewDetail = (props) => {
       <Descriptions.Item label="机构名称">{orgName}</Descriptions.Item>
       <Descriptions.Item label="设备类型">{productTypeName}</Descriptions.Item>
       <Descriptions.Item label="设备编号">{deviceNo}</Descriptions.Item>
-      <Descriptions.Item label="存放点">{locationsName.join(',')}</Descriptions.Item>
+      <Descriptions.Item label="存放点">{locationsName}</Descriptions.Item>
       <Descriptions.Item label="标志明码">{markCode}</Descriptions.Item>
       <Descriptions.Item label="生产厂家">{manufacturer}</Descriptions.Item>
       <Descriptions.Item label="品牌">{brand}</Descriptions.Item>
