@@ -10,6 +10,7 @@ import { query, update, add, remove } from './service';
 import { fields as pageFields, fieldsKey, formName, fieldsCitySelectKey } from './config';
 import request from '@/utils/request';
 import UploadButton from '@/components/UploadButton';
+import ViewDetail from './components/ViewDetail';
 
 /**
  * 添加节点
@@ -76,6 +77,7 @@ const TableList = () => {
   const [createModalVisible, handleModalVisible] = useState(false);
   const [updateModalVisible, handleUpdateModalVisible] = useState(false);
   const [defaultExpanded, setDefaultExpanded] = useState([]);
+  const [viewModalVisible, handleViewModalVisible] = useState(false);
   const [editData, setEditData] = useState({});
   const actionRef = useRef();
   const [selectedRowsState, setSelectedRows] = useState([]);
@@ -87,8 +89,18 @@ const TableList = () => {
       valueType: 'option',
       render: (_, record) => (
         <>
-          {/* <a href="">查看</a> */}
-          {/* <Divider type="vertical" /> */}
+          <a
+            onClick={() => {
+              handleViewModalVisible(true);
+              const editData = {
+                ...record,
+              };
+              setEditData(editData);
+            }}
+          >
+            查看
+          </a>
+          <Divider type="vertical" />
           <a
             onClick={() => {
               handleUpdateModalVisible(true);
@@ -282,6 +294,13 @@ const TableList = () => {
           columns={columns}
           rowSelection={{}}
         /> */}
+      </CreateForm>
+      <CreateForm
+        title="设备详情"
+        modalVisible={viewModalVisible}
+        onCancel={() => handleViewModalVisible(false)}
+      >
+        <ViewDetail data={editData} />
       </CreateForm>
     </PageContainer>
   );

@@ -47,27 +47,27 @@ export const fields = [
       return deviceStatus[row.deviceStatus];
     },
   },
-  {
-    title: '经度',
-    dataIndex: 'longitude',
-    render: (text) => {
-      return text || '无'
-    },
-  },
-  {
-    title: '纬度',
-    dataIndex: 'latitude',
-    render: (text) => {
-      return text || '无'
-    },
-  },
-  {
-    title: '备注',
-    dataIndex: 'remark',
-    render: (text) => {
-      return text || '无'
-    },
-  },
+  // {
+  //   title: '经度',
+  //   dataIndex: 'longitude',
+  //   render: (text) => {
+  //     return text || '无'
+  //   },
+  // },
+  // {
+  //   title: '纬度',
+  //   dataIndex: 'latitude',
+  //   render: (text) => {
+  //     return text || '无'
+  //   },
+  // },
+  // {
+  //   title: '备注',
+  //   dataIndex: 'remark',
+  //   render: (text) => {
+  //     return text || '无'
+  //   },
+  // },
   {
     title: '上次检测时间',
     dataIndex: 'checkTime',

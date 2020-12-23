@@ -3,6 +3,7 @@ import { Form, Input, Button, DatePicker } from 'antd';
 import OrgSelect from '@/components/OrgSelect';
 import LocationSelect from '@/components/LocationSelect';
 import ProductTypeSelect from '@/components/ProductTypeSelect';
+const { TextArea } = Input;
 const layout = {
   labelCol: { span: 4 },
   wrapperCol: { span: 20 },
@@ -50,6 +51,15 @@ const InnerForm = (props) => {
       </Form.Item>
       <Form.Item label="生产日期" name="produceDate">
         <DatePicker />
+      </Form.Item>
+      <Form.Item label="经度" name="longitude">
+        <Input />
+      </Form.Item>
+      <Form.Item label="纬度" name="latitude">
+        <Input />
+      </Form.Item>
+      <Form.Item label="备注" name="remark">
+        <TextArea />
       </Form.Item>
       <Form.Item label="上次检测时间" name="checkTime">
         <DatePicker />
