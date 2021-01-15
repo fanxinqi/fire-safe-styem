@@ -4,7 +4,7 @@ import { Col, Row, Tabs, Select, Drawer, Table } from 'antd';
 import { Chart, Geom, Axis, Tooltip } from 'bizcharts';
 import ProTable from '@ant-design/pro-table';
 import { fields as pageFields, deviceStatus } from './config';
-import { query,queryMap} from './service';
+import { query, queryMap } from './service';
 
 import styles from './style.less';
 const { TabPane } = Tabs;
@@ -15,7 +15,7 @@ class Line3 extends React.Component {
     locationId: 0,
     defaultData: [],
     visible: false,
-    item:{},
+    item: {},
   };
   componentDidMount() {
     this.actionRef = null;
@@ -39,8 +39,8 @@ class Line3 extends React.Component {
       console.log(item);
       this.setState({
         item,
-        visible:true,
-      })
+        visible: true,
+      });
     });
     return marker;
   }
@@ -76,6 +76,7 @@ class Line3 extends React.Component {
   };
 
   renderMap() {
+    if (this.state.defaultData.length === 0) return;
     this.map = new BMapGL.Map('map_root');
     // var point = new BMapGL.Point(116.404, 39.915);
     // this.map.centerAndZoom(point, 15);
@@ -108,7 +109,7 @@ class Line3 extends React.Component {
 
   render() {
     const { data, defaultValue } = this.props;
-    const {item} = this.state;
+    const { item } = this.state;
     return (
       <Row
         span={24}
@@ -234,7 +235,9 @@ class Line3 extends React.Component {
           <p>设备编号：{item.deviceNo}</p>
           <p>型号：{item.deviceModel}</p>
           <p>生产日期：{item.produceDate}</p>
-          <p>经纬度:{item.longitude},{item.latitude}</p>
+          <p>
+            经纬度:{item.longitude},{item.latitude}
+          </p>
           <p>状态:{deviceStatus[item.checkStatus]}</p>
         </Drawer>
       </Row>
